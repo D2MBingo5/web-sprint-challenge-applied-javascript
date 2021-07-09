@@ -1,3 +1,6 @@
+import axios from "axios"
+import { topics } from "../mocks/data"
+
 const Tabs = (topics) => {
   // TASK 3
   // ---------------------
@@ -13,7 +16,25 @@ const Tabs = (topics) => {
   //   <div class="tab">technology</div>
   // </div>
   //
+  const topicsDiv = document.createElement('div')
+  topicsDiv.classList.add('topics')
+  // document.querySelector('div.tabs-container').appendChild(topicsDiv)
+
+  topics.forEach(item => {
+    const newTopic = document.createElement('div')
+    newTopic.classList.add('tab')
+    newTopic.textContent = item
+    topicsDiv.appendChild(newTopic)
+  })
+  return topicsDiv
 }
+const testData = [
+  "one",
+  "two",
+  "three"
+]
+console.log(testData)
+console.log(Tabs(testData))
 
 const tabsAppender = (selector) => {
   // TASK 4
@@ -22,7 +43,41 @@ const tabsAppender = (selector) => {
   // It should obtain topics from this endpoint: `http://localhost:5000/api/topics` (test it in Postman/HTTPie!).
   // Find the array of topics inside the response, and create the tabs using the Tabs component.
   // Append the tabs to the element in the DOM that matches the selector passed to the function.
-  //
+  // 
+
+  selector = document.querySelector('div.tabs-container')
+  console.log(selector)
+  //test v
+  // selector.appendChild(Tabs(testData))
+  axios.get(`http://localhost:5000/api/topics`)
+  .then(res => {
+    const topicsArray = res.data.topics
+    console.log(topicsArray)
+    // Tabs(topicsArray)
+    selector.appendChild(Tabs(topicsArray))
+    // res.data.topics.forEach(item => {
+    //   console.log(item)
+    //   // const newTopic = Tabs(item)
+    //   // selector.appendChild(Tabs(item))
+    // })
+  })
+  .catch(err => {console.log(err)})
+  .finally(() => {console.log('done')})
+
+  // axios.get(`http://localhost:5000/api/${selector}`)
+  // .then(res => {
+  //   console.log(res.data)
+  //   res.data.forEach(item => {
+  //     console.log(item)
+  //   })
+  //   // res.forEach(topic => {
+  //   //   const newTopic = Tabs(topic)
+  //   //   document.querySelector('.topics').appendChild(newTopic)
+  //   //   return newTopic
+  //   // })
+  // })
+  // .catch(err => {console.log(err)})
+  // .finally(() => {console.log('done')})
 }
 
 export { Tabs, tabsAppender }
