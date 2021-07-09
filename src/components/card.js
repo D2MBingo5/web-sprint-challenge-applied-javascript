@@ -1,3 +1,5 @@
+import axios from "axios"
+
 const Card = (article) => {
   // TASK 5
   // ---------------------
@@ -17,7 +19,39 @@ const Card = (article) => {
   //   </div>
   // </div>
   //
+  const cardContainer = document.createElement('div')
+    const headlineDiv = document.createElement('div')
+    const authorDiv = document.createElement('div')
+      const authorPicDiv = document.createElement('div')
+        const authorPic = document.createElement('img')
+      const authorName = document.createElement('span')
+  
+  cardContainer.classList.add('card')
+  headlineDiv.classList.add('headline')
+  authorDiv.classList.add('author')
+  authorPicDiv.classList.add('img-container')
+
+  cardContainer.appendChild(headlineDiv)
+  cardContainer.appendChild(authorDiv)
+  authorDiv.appendChild(authorPicDiv)
+  authorPicDiv.appendChild(authorPic)
+  authorDiv.appendChild(authorName)
+
+  headlineDiv.textContent = article.headline
+  authorPic.src = article.authorPhoto
+  authorName.textContent = article.authorName
+
+  return cardContainer
 }
+
+//testing
+axios.get(`http://localhost:5000/api/articles`)
+  .then(res => {
+    console.log(res.data.articles) //an array of arrays !!!
+    console.log(res.data.articles.bootstrap[0])
+    const testBootstrap0 = res.data.articles.bootstrap[0]
+    console.log(Card(testBootstrap0))
+  })
 
 const cardAppender = (selector) => {
   // TASK 6
