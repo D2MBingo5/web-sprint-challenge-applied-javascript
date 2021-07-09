@@ -49,16 +49,6 @@ const Card = (article) => {
   return cardContainer
 }
 
-//testing
-// axios.get(`http://localhost:5000/api/articles`)
-//   .then(res => {
-//     console.log(res.data.articles) //an array of arrays !!!
-//     console.log(res.data.articles.bootstrap[0])
-//     console.log(Card(res.data.articles.bootstrap[0]))
-//     const testBootstrap0 = res.data.articles.bootstrap[0]
-//     console.log(Card(testBootstrap0))
-//   })
-
 const cardAppender = (selector) => {
   // TASK 6
   // ---------------------
@@ -77,7 +67,7 @@ const cardAppender = (selector) => {
       const articlesTechnology = res.data.articles.technology
       const articlesJquery = res.data.articles.jquery
       const articlesNode = res.data.articles.node
-      // console.log(articlesJavascript, articlesBootstrap, articlesTechnology, articlesJquery, articlesNode)
+      // Because res.data.articles doesn't really act like an array, it makes drying up this function very difficult lacking forEach
       articlesJavascript.forEach(item => {
         selector.appendChild(Card(item))
       })
