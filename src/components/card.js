@@ -41,6 +41,10 @@ const Card = (article) => {
   authorPic.src = article.authorPhoto
   authorName.textContent = article.authorName
 
+  cardContainer.addEventListener('click', () => {
+    console.log(article)
+  })
+
   return cardContainer
 }
 
@@ -49,6 +53,7 @@ axios.get(`http://localhost:5000/api/articles`)
   .then(res => {
     console.log(res.data.articles) //an array of arrays !!!
     console.log(res.data.articles.bootstrap[0])
+    console.log(Card(res.data.articles.bootstrap[0]))
     const testBootstrap0 = res.data.articles.bootstrap[0]
     console.log(Card(testBootstrap0))
   })
