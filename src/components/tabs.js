@@ -18,7 +18,6 @@ const Tabs = (topics) => {
   //
   const topicsDiv = document.createElement('div')
   topicsDiv.classList.add('topics')
-  // document.querySelector('div.tabs-container').appendChild(topicsDiv)
 
   topics.forEach(item => {
     const newTopic = document.createElement('div')
@@ -28,13 +27,6 @@ const Tabs = (topics) => {
   })
   return topicsDiv
 }
-const testData = [
-  "one",
-  "two",
-  "three"
-]
-console.log(testData)
-console.log(Tabs(testData))
 
 const tabsAppender = (selector) => {
   // TASK 4
@@ -46,38 +38,15 @@ const tabsAppender = (selector) => {
   // 
 
   selector = document.querySelector('div.tabs-container')
-  console.log(selector)
-  //test v
-  // selector.appendChild(Tabs(testData))
+  
   axios.get(`http://localhost:5000/api/topics`)
   .then(res => {
     const topicsArray = res.data.topics
-    console.log(topicsArray)
-    // Tabs(topicsArray)
-    selector.appendChild(Tabs(topicsArray))
-    // res.data.topics.forEach(item => {
-    //   console.log(item)
-    //   // const newTopic = Tabs(item)
-    //   // selector.appendChild(Tabs(item))
-    // })
+    
+    selector.appendChild(Tabs(topicsArray))    
   })
   .catch(err => {console.log(err)})
   .finally(() => {console.log('done')})
-
-  // axios.get(`http://localhost:5000/api/${selector}`)
-  // .then(res => {
-  //   console.log(res.data)
-  //   res.data.forEach(item => {
-  //     console.log(item)
-  //   })
-  //   // res.forEach(topic => {
-  //   //   const newTopic = Tabs(topic)
-  //   //   document.querySelector('.topics').appendChild(newTopic)
-  //   //   return newTopic
-  //   // })
-  // })
-  // .catch(err => {console.log(err)})
-  // .finally(() => {console.log('done')})
 }
 
 export { Tabs, tabsAppender }
