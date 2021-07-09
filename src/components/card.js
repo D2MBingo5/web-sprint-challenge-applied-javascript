@@ -1,4 +1,5 @@
 import axios from "axios"
+import { articles } from "../mocks/data"
 
 const Card = (article) => {
   // TASK 5
@@ -49,14 +50,14 @@ const Card = (article) => {
 }
 
 //testing
-axios.get(`http://localhost:5000/api/articles`)
-  .then(res => {
-    console.log(res.data.articles) //an array of arrays !!!
-    console.log(res.data.articles.bootstrap[0])
-    console.log(Card(res.data.articles.bootstrap[0]))
-    const testBootstrap0 = res.data.articles.bootstrap[0]
-    console.log(Card(testBootstrap0))
-  })
+// axios.get(`http://localhost:5000/api/articles`)
+//   .then(res => {
+//     console.log(res.data.articles) //an array of arrays !!!
+//     console.log(res.data.articles.bootstrap[0])
+//     console.log(Card(res.data.articles.bootstrap[0]))
+//     const testBootstrap0 = res.data.articles.bootstrap[0]
+//     console.log(Card(testBootstrap0))
+//   })
 
 const cardAppender = (selector) => {
   // TASK 6
@@ -67,6 +68,34 @@ const cardAppender = (selector) => {
   // Create a card from each and every article object in the response, using the Card component.
   // Append each card to the element in the DOM that matches the selector passed to the function.
   //
+  selector = document.querySelector('.cards-container')
+  
+  axios.get(`http://localhost:5000/api/articles`)
+    .then(res => {
+      const articlesJavascript = res.data.articles.javascript
+      const articlesBootstrap = res.data.articles.bootstrap
+      const articlesTechnology = res.data.articles.technology
+      const articlesJquery = res.data.articles.jquery
+      const articlesNode = res.data.articles.node
+      // console.log(articlesJavascript, articlesBootstrap, articlesTechnology, articlesJquery, articlesNode)
+      articlesJavascript.forEach(item => {
+        selector.appendChild(Card(item))
+      })
+      articlesBootstrap.forEach(item => {
+        selector.appendChild(Card(item))
+      })
+      articlesTechnology.forEach(item => {
+        selector.appendChild(Card(item))
+      })
+      articlesJquery.forEach(item => {
+        selector.appendChild(Card(item))
+      })
+      articlesNode.forEach(item => {
+        selector.appendChild(Card(item))
+      })
+    })
+    .catch(err => {console.log(err)})
+    .finally(() => {console.log('done')})
 }
 
 export { Card, cardAppender }
