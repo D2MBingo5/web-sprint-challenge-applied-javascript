@@ -11,7 +11,26 @@ const Header = (title, date, temp) => {
   //    <span class="temp">{ temp }</span>
   //  </div>
   //
+const header = document.createElement('div')
+const spanDate = document.createElement('span')
+const h1title = document.createElement('h1')
+const spanTemp = document.createElement('span')
+
+header.classList.add('header')
+spanDate.classList.add('date')
+spanTemp.classList.add('temp')
+
+header.appendChild(spanDate)
+header.appendChild(h1title)
+header.appendChild(spanTemp)
+
+spanDate.textContent = date
+h1title.textContent = title
+spanTemp.textContent = temp
+
+return header
 }
+console.log(Header('temp title', '7/9/21', 'temp content'))
 
 const headerAppender = (selector) => {
   // TASK 2
