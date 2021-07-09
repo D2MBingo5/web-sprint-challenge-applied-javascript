@@ -30,7 +30,7 @@ spanTemp.textContent = temp
 
 return header
 }
-console.log(Header('temp title', '7/9/21', 'temperature'))
+// console.log(Header('temp title', '7/9/21', 'temperature'))
 
 const headerAppender = (selector) => {
   // TASK 2
@@ -40,7 +40,7 @@ const headerAppender = (selector) => {
   // It should append the header to the element in the DOM that matches the given selector.
   //
   selector = document.querySelector('.header-container')
-  console.log(selector)
+  // console.log(selector)
   selector.appendChild(Header('Lambda Times', 'July 9, 2021', '75'))
 }
 
